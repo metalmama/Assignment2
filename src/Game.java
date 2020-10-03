@@ -24,16 +24,16 @@ public class Game {
 
     public void beingAttacked(String attackerName, int attackerWeaponDamage, String attackerWeaponName) {
         System.out.println(attackerName + " STRIKES " + characterName + " WITH A " + attackerWeaponName);
-        if (hp <= 0){
+        if (hp <= 0) {
             System.out.println("** YOU CANNOT ATTACK - HE'S ALREADY DEAD, MATE! **");
-        }else if(weaponName.equals("Excalibur")) {
+        } else if (weaponName.equals("Excalibur")) {
             System.out.println("** YOU CANNOT ATTACK SOMEONE WHO HAS EXCALIBUR **");
         } else {
             System.out.println("IT DOES " + attackerWeaponDamage + " DAMAGE");
             hp = (hp - attackerWeaponDamage);
-            if(hp < 1){
+            if (hp < 1) {
                 System.out.println(characterName + " HAS SNUFFED IT!");
-            }else {
+            } else {
                 System.out.println(characterName + " HAS " + hp + " REMAINING HEALTH! ");
             }
         }
@@ -43,58 +43,50 @@ public class Game {
     public String searchWeapon(String searchWeaponName) {
         switch (searchWeaponName) {
             case "Hammer":
+                System.out.println("Muppet has got hammer");
+                break;
             case "Magic wand":
+                System.out.println("Geezer has got magic wand");
+                break;
             case "Excalibur":
                 if (searchWeaponName.equals(weaponName)) {
                     System.out.println("Found " + weaponName + " on " + characterName);
-                    return characterName;
-                } else {
-                    //valid weapon but not found
-                    System.out.println("Couldn't find " + searchWeaponName + " on " + characterName
-                            + " (They have " + weaponName + ")");
+                    break;
                 }
-                break;
-            default:
-                //Invalid weapon
-                System.out.println("Ghosted!");
-
-
+                //valid weapon but not found
+                System.out.println("Couldn't find " + searchWeaponName);
         }
         return "";
     }
 
-    public void armWithExcalibur() {
-        System.out.println("Arming " + characterName + " with Excalibur");
-        weaponName = "Excalibur";
-        weaponDamage = excalibur;
-    }
-
-
-    public void drinkingHealingPotion() {
-        int healingPotion = 20;
-        hp = hp + healingPotion;
-        System.out.println(characterName + " GAINED " + healingPotion + " HEALTH BY DRINKING A HEALING POTION");
-        System.out.println(characterName + " NOW HAS A HEALTH OF " + hp);
-    }
-
-    public static void main(String[] args) {
-        Game goodGuy = new Game("Muppet", hammer, 100, "Hammer");
-        Game evilGuy = new Game("Geezer", magicWand, 80, "Magic Wand");
-
-        evilGuy.beingAttacked(goodGuy.characterName, goodGuy.weaponDamage, goodGuy.weaponName);
-        goodGuy.beingAttacked(evilGuy.characterName, evilGuy.weaponDamage, evilGuy.weaponName);
-
-        goodGuy.drinkingHealingPotion();
-        evilGuy.drinkingHealingPotion();
-
-        if (!goodGuy.searchWeapon("Excalibur").equals(goodGuy.characterName)) {
-            goodGuy.armWithExcalibur();
+        public void armWithExcalibur () {
+            System.out.println("Arming " + characterName + " with Excalibur");
+            weaponName = "Excalibur";
+            weaponDamage = excalibur;
         }
-        goodGuy.searchWeapon("Excalibur");
-        goodGuy.beingAttacked(evilGuy.characterName, evilGuy.weaponDamage, evilGuy.weaponName);
-        evilGuy.beingAttacked(goodGuy.characterName, goodGuy.weaponDamage, goodGuy.weaponName);
 
+        public void drinkingHealingPotion () {
+            int healingPotion = 20;
+            hp = hp + healingPotion;
+            System.out.println(characterName + " GAINED " + healingPotion + " HEALTH BY DRINKING A HEALING POTION");
+            System.out.println(characterName + " NOW HAS A HEALTH OF " + hp);
+        }
 
+        public static void main (String[]args){
+            Game goodGuy = new Game("Muppet", hammer, 100, "Hammer");
+            Game evilGuy = new Game("Geezer", magicWand, 80, "Magic Wand");
+
+            evilGuy.beingAttacked(goodGuy.characterName, goodGuy.weaponDamage, goodGuy.weaponName);
+            goodGuy.beingAttacked(evilGuy.characterName, evilGuy.weaponDamage, evilGuy.weaponName);
+
+            goodGuy.drinkingHealingPotion();
+            evilGuy.drinkingHealingPotion();
+
+            if (!goodGuy.searchWeapon("Excalibur").equals(goodGuy.characterName)) {
+                goodGuy.armWithExcalibur();
+            }
+            goodGuy.searchWeapon("Excalibur");
+            goodGuy.beingAttacked(evilGuy.characterName, evilGuy.weaponDamage, evilGuy.weaponName);
+            evilGuy.beingAttacked(goodGuy.characterName, goodGuy.weaponDamage, goodGuy.weaponName);
+        }
     }
-
-}
